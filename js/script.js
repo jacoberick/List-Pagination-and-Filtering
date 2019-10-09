@@ -3,13 +3,16 @@ Treehouse Techdegree:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
 
+//global vars that contain full list of students
+//and the amount of students that will show on each page
 const studentList = document.getElementsByClassName("student-item");
 const perPage = 10;
 
+//`showPage` calculates which students to display based on selected page number
 const showPage = (list, page) => {
   const start = page * perPage - perPage;
   const end = page * perPage;
-
+  //loops through the list (in this case `studentList`)
   for (i = 0; i < list.length; i++) {
     if (i >= start && i < end) {
       list[i].hidden = false;
@@ -21,11 +24,7 @@ const showPage = (list, page) => {
 
 showPage(studentList, 1);
 
-/***
-   Create the `appendPageLinks function` to generate, append, and add
-   functionality to the pagination buttons.
-***/
-
+//`appendPageLinks` adds page link button(s) depending on amount of students in studentList.
 const appendPageLinks = list => {
   const pages = Math.ceil(list.length / perPage);
   const pageSelect = document.querySelector(".page");
@@ -35,8 +34,8 @@ const appendPageLinks = list => {
     paginationList += `<li class='button-pg'>`;
     paginationList +=
       i === 1
-        ? `<a onclick='pageHopper' class="active" (${i})">${i}</a>`
-        : `<a onclick='pageHopper' (${i})">${i}</a>`;
+        ? `<a onclick='pageHopper(${i})' class="active">${i}</a>`
+        : `<a onclick='pageHopper(${i})'>${i}</a>`;
     paginationList += `</li>`;
   }
   paginationList += `</ol></div>`;
@@ -46,5 +45,12 @@ appendPageLinks(studentList);
 
 const pageHopper = newPage => {
   const buttons = document.getElementsByClassName("button-pg");
+  for (i = 0; i < buttons.length; i++) {
+    let aTag = buttons[i].children[0];
+    i + 1 === newPage
+      ? aTag.classList.add("active")
+      : aTag.classList.remove("active");
+  }
+  showPage(studentList, newPage);
 };
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
