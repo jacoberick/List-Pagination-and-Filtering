@@ -92,7 +92,8 @@ const appendSearchBar = () => {
   const headerSelect = document.querySelector(".page-header");
   let insrtSearch = `<form class='student-search'>`;
   insrtSearch += `<input type='text' onkeyup='searchStudents()' id='search' placeholder='Search for students...'>`;
-  insrtSearch += `<button type="submit">Search</button>`;
+  // insrtSearch += `<button type="submit">Search</button>`;
+  //button removed because pasting still triggers onkeyup
   insrtSearch += `</form>`;
   headerSelect.innerHTML += insrtSearch;
 };
@@ -145,5 +146,6 @@ const searchStudents = () => {
 const studentsFound = numResults => {
   const results = document.getElementById("results");
   results.innerText = `${numResults} students`;
+  results.style.textAlign = "center";
 };
 studentsFound(studentLen);
