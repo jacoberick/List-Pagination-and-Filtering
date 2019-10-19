@@ -61,6 +61,8 @@ const updatePageLinks = num => {
   const pages = Math.ceil(num / perPage);
   const buttons = document.getElementsByClassName("button-pg");
 
+  //loops through buttons and alters button pagination depending if there are more buttons than needed...
+  //... this is determined by the if statement
   for (var i = 0; i < buttons.length; i++) {
     if (i + 1 > pages) {
       buttons[i].style.display = "none";
